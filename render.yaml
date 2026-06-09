@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: matematica-sem-misterio
+    env: docker
+    plan: starter
+    healthCheckPath: /up
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: APP_HOST
+        value: matematica-sem-misterio.onrender.com
+      - key: RAILS_LOG_LEVEL
+        value: info
