@@ -1,0 +1,7 @@
+<% content_for :title, "Admin - Questão" %>
+
+<div class="space-y-4 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+  <p class="text-sm font-semibold text-emerald-700">Questão</p>
+  <h1 class="text-3xl font-black text-slate-900"><%= @question.statement %></h1>
+  <p class="text-slate-600"><%= @question.correct_option_label %></p>
+</div>

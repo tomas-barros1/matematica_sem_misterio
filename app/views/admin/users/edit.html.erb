@@ -1,0 +1,22 @@
+<% content_for :title, "Admin - Editar usuário" %>
+
+<div class="mx-auto max-w-2xl space-y-6">
+  <h1 class="text-3xl font-black text-slate-900">Editar usuário</h1>
+
+  <%= form_with model: [:admin, @user], class: "space-y-4 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200" do |form| %>
+    <div>
+      <%= form.label :name, "Nome", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= form.text_field :name, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+    </div>
+
+    <div>
+      <%= form.label :role, "Papel", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= form.select :role, User.roles.keys.map { |role| [ role_label(User.new(role: role)), role ] }, {}, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+    </div>
+
+    <div class="flex justify-end gap-3">
+      <%= link_to "Cancelar", admin_users_path, class: "rounded-full bg-slate-100 px-5 py-3 text-sm font-semibold text-slate-900" %>
+      <%= form.submit "Salvar", class: "rounded-full bg-emerald-500 px-5 py-3 text-sm font-semibold text-white" %>
+    </div>
+  <% end %>
+</div>

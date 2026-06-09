@@ -1,0 +1,42 @@
+<% content_for :title, "Perfil" %>
+
+<div class="space-y-6">
+  <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+    <p class="text-sm font-semibold text-emerald-700"><%= role_label(@user) %></p>
+    <h1 class="mt-2 text-3xl font-black text-slate-900"><%= @user.display_name %></h1>
+    <p class="mt-2 text-slate-600"><%= @user.email %></p>
+  </div>
+
+  <div class="grid gap-4 lg:grid-cols-4">
+    <%= render "shared/stats_card", title: "XP", value: @user.xp %>
+    <%= render "shared/stats_card", title: "Nível", value: @user.level %>
+    <%= render "shared/stats_card", title: "Sequência", value: "#{@user.streak} dias" %>
+    <%= render "shared/stats_card", title: "Lições", value: @completed_lessons.count %>
+  </div>
+
+  <div class="grid gap-8 lg:grid-cols-2">
+    <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+      <h2 class="text-xl font-black text-slate-900">Lições concluídas</h2>
+      <div class="mt-4 space-y-3">
+        <% @completed_lessons.each do |completion| %>
+          <div class="rounded-2xl bg-slate-50 p-4">
+            <p class="font-semibold text-slate-900"><%= completion.lesson.title %></p>
+            <p class="text-sm text-slate-600"><%= completion.lesson.subject.name %> • <%= completion.score %>%</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+      <h2 class="text-xl font-black text-slate-900">Conquistas</h2>
+      <div class="mt-4 space-y-3">
+        <% @achievements.each do |user_achievement| %>
+          <div class="rounded-2xl bg-amber-50 p-4">
+            <p class="font-semibold text-slate-900"><%= user_achievement.achievement.name %></p>
+            <p class="text-sm text-slate-600"><%= user_achievement.achievement.description %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

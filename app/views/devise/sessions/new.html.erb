@@ -1,0 +1,29 @@
+<% content_for :title, "Entrar" %>
+
+<div class="mx-auto max-w-md rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
+  <h1 class="text-3xl font-black text-slate-900">Entrar</h1>
+  <p class="mt-2 text-slate-600">Volte a estudar e continue sua sequência.</p>
+
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <%= form_with scope: resource_name, url: session_path(resource_name), class: "mt-6 space-y-4" do |form| %>
+    <div>
+      <%= form.label :email, "Email", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= form.email_field :email, autofocus: true, autocomplete: "email", class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+    </div>
+    <div>
+      <%= form.label :password, "Senha", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= form.password_field :password, autocomplete: "current-password", class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+    </div>
+    <div class="flex items-center justify-between">
+      <label class="flex items-center gap-2 text-sm text-slate-600">
+        <%= form.check_box :remember_me, class: "rounded border-slate-300 text-emerald-600" %>
+        Lembrar de mim
+      </label>
+      <%= link_to "Esqueceu sua senha?", new_password_path(resource_name), class: "text-sm font-medium text-emerald-700" %>
+    </div>
+    <%= form.submit "Entrar", class: "w-full rounded-full bg-emerald-500 px-5 py-3 text-sm font-bold text-white hover:bg-emerald-600" %>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

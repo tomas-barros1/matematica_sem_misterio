@@ -1,0 +1,23 @@
+<%= form_with model: [:admin, subject], class: "space-y-4 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200" do |form| %>
+  <%= render "shared/form_errors", object: subject %>
+
+  <div>
+    <%= form.label :name, "Nome", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+    <%= form.text_field :name, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+  </div>
+
+  <div>
+    <%= form.label :description, "Descrição", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+    <%= form.text_area :description, rows: 4, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+  </div>
+
+  <div>
+    <%= form.label :position, "Posição", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+    <%= form.number_field :position, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+  </div>
+
+  <div class="flex justify-end gap-3">
+    <%= link_to "Cancelar", admin_subjects_path, class: "rounded-full bg-slate-100 px-5 py-3 text-sm font-semibold text-slate-900" %>
+    <%= form.submit "Salvar", class: "rounded-full bg-emerald-500 px-5 py-3 text-sm font-semibold text-white" %>
+  </div>
+<% end %>

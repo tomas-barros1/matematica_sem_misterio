@@ -1,0 +1,26 @@
+<% content_for :title, "Admin - Lições" %>
+
+<div class="space-y-6">
+  <div class="flex items-end justify-between gap-4">
+    <div>
+      <h1 class="text-3xl font-black text-slate-900">Lições</h1>
+      <p class="text-slate-600">Conteúdo e progressão pedagógica.</p>
+    </div>
+    <%= link_to "Nova lição", new_admin_lesson_path, class: "rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white" %>
+  </div>
+
+  <div class="space-y-3">
+    <% @lessons.each do |lesson| %>
+      <div class="flex items-center justify-between rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+        <div>
+          <p class="text-lg font-bold text-slate-900"><%= lesson.title %></p>
+          <p class="text-sm text-slate-600"><%= lesson.subject.name %> • <%= lesson.position %> • <%= lesson.xp_reward %> XP</p>
+        </div>
+        <div class="flex gap-2">
+          <%= link_to "Editar", edit_admin_lesson_path(lesson), class: "rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white" %>
+          <%= button_to "Excluir", admin_lesson_path(lesson), method: :delete, class: "rounded-full bg-rose-500 px-4 py-2 text-sm font-semibold text-white" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

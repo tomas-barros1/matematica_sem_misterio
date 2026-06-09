@@ -1,0 +1,40 @@
+<%= form_with model: [:admin, question], class: "space-y-4 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200" do |form| %>
+  <%= render "shared/form_errors", object: question %>
+
+  <div>
+    <%= form.label :lesson_id, "Lição", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+    <%= form.collection_select :lesson_id, Lesson.includes(:subject).order("subjects.name ASC, lessons.position ASC").references(:subject), :id, :title, {}, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+  </div>
+  <div class="grid gap-4 md:grid-cols-2">
+    <div>
+      <%= form.label :kind, "Tipo", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= form.select :kind, [ [ "Múltipla escolha", "multiple_choice" ], [ "Verdadeiro ou falso", "true_false" ] ], {}, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+    </div>
+    <div>
+      <%= form.label :position, "Posição", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= form.number_field :position, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+    </div>
+  </div>
+  <div>
+    <%= form.label :statement, "Enunciado", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+    <%= form.text_area :statement, rows: 3, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+  </div>
+  <div class="grid gap-4 md:grid-cols-2">
+    <div><%= form.label :option_a, "Alternativa A", class: "mb-2 block text-sm font-semibold text-slate-700" %><%= form.text_field :option_a, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %></div>
+    <div><%= form.label :option_b, "Alternativa B", class: "mb-2 block text-sm font-semibold text-slate-700" %><%= form.text_field :option_b, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %></div>
+    <div><%= form.label :option_c, "Alternativa C", class: "mb-2 block text-sm font-semibold text-slate-700" %><%= form.text_field :option_c, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %></div>
+    <div><%= form.label :option_d, "Alternativa D", class: "mb-2 block text-sm font-semibold text-slate-700" %><%= form.text_field :option_d, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %></div>
+  </div>
+  <div>
+    <%= form.label :correct_answer, "Resposta correta", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+    <%= form.text_field :correct_answer, class: "w-full rounded-2xl border-slate-300 px-4 py-3", placeholder: "a, b, c, d, true ou false" %>
+  </div>
+  <div>
+    <%= form.label :explanation, "Explicação", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+    <%= form.text_area :explanation, rows: 3, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+  </div>
+  <div class="flex justify-end gap-3">
+    <%= link_to "Cancelar", admin_questions_path, class: "rounded-full bg-slate-100 px-5 py-3 text-sm font-semibold text-slate-900" %>
+    <%= form.submit "Salvar", class: "rounded-full bg-emerald-500 px-5 py-3 text-sm font-semibold text-white" %>
+  </div>
+<% end %>

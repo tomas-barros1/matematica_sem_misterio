@@ -1,0 +1,37 @@
+<%= form_with model: [:admin, lesson], class: "space-y-4 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200" do |form| %>
+  <%= render "shared/form_errors", object: lesson %>
+
+  <div>
+    <%= form.label :subject_id, "Disciplina", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+    <%= form.collection_select :subject_id, Subject.order(:name), :id, :name, {}, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+  </div>
+  <div>
+    <%= form.label :title, "Título", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+    <%= form.text_field :title, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+  </div>
+  <div>
+    <%= form.label :description, "Descrição", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+    <%= form.text_area :description, rows: 4, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+  </div>
+  <div class="grid gap-4 md:grid-cols-3">
+    <div>
+      <%= form.label :position, "Posição", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= form.number_field :position, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+    </div>
+    <div>
+      <%= form.label :xp_reward, "XP", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= form.number_field :xp_reward, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+    </div>
+    <div class="flex items-end">
+      <label class="flex items-center gap-3 rounded-2xl border border-slate-200 px-4 py-3">
+        <%= form.check_box :active, class: "h-4 w-4 rounded border-slate-300 text-emerald-600" %>
+        <span class="text-sm font-semibold text-slate-700">Ativa</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-3">
+    <%= link_to "Cancelar", admin_lessons_path, class: "rounded-full bg-slate-100 px-5 py-3 text-sm font-semibold text-slate-900" %>
+    <%= form.submit "Salvar", class: "rounded-full bg-emerald-500 px-5 py-3 text-sm font-semibold text-white" %>
+  </div>
+<% end %>

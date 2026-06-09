@@ -1,0 +1,14 @@
+<% content_for :title, "Conquistas" %>
+
+<div class="space-y-6">
+  <div>
+    <h1 class="text-3xl font-black text-slate-900">Conquistas</h1>
+    <p class="text-slate-600">Marcos para manter a motivação em alta.</p>
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+    <% @achievements.each do |achievement| %>
+      <%= render "shared/achievement_card", achievement: achievement, unlocked: @unlocked_ids.include?(achievement.id) %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<% content_for :title, "Disciplinas" %>
+
+<div class="space-y-6">
+  <div>
+    <h1 class="text-3xl font-black text-slate-900">Disciplinas</h1>
+    <p class="text-slate-600">Escolha uma área para estudar.</p>
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+    <% @subjects.each do |subject| %>
+      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+        <p class="text-sm font-semibold text-emerald-700"><%= subject.lessons.size %> lições</p>
+        <h2 class="mt-2 text-2xl font-black text-slate-900"><%= subject.name %></h2>
+        <p class="mt-2 text-sm text-slate-600"><%= subject.description %></p>
+        <div class="mt-5">
+          <%= link_to "Ver disciplina", subject_path(subject), class: "rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-600" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

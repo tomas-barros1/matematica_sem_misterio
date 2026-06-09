@@ -1,0 +1,14 @@
+<% content_for :title, "Ranking" %>
+
+<div class="space-y-6">
+  <div class="rounded-3xl bg-gradient-to-r from-emerald-500 to-lime-400 p-6 text-white shadow-sm">
+    <h1 class="text-3xl font-black">Ranking</h1>
+    <p class="mt-2 max-w-2xl text-sm text-emerald-50">Acompanhe apenas os estudantes mais ativos na jornada de Matemática.</p>
+  </div>
+
+  <div class="grid gap-3">
+    <% @users.each_with_index do |user, index| %>
+      <%= render "shared/ranking_row", user: user, rank: index + 1 %>
+    <% end %>
+  </div>
+</div>

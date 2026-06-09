@@ -1,0 +1,30 @@
+<% content_for :title, "Registrar" %>
+
+<div class="mx-auto max-w-md rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
+  <h1 class="text-3xl font-black text-slate-900">Criar conta</h1>
+  <p class="mt-2 text-slate-600">Entre para jogar, estudar e evoluir.</p>
+
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <%= form_with scope: resource_name, url: registration_path(resource_name), class: "mt-6 space-y-4" do |form| %>
+    <div>
+      <%= form.label :name, "Nome", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= form.text_field :name, autofocus: true, class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+    </div>
+    <div>
+      <%= form.label :email, "Email", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= form.email_field :email, autocomplete: "email", class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+    </div>
+    <div>
+      <%= form.label :password, "Senha", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= form.password_field :password, autocomplete: "new-password", class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+    </div>
+    <div>
+      <%= form.label :password_confirmation, "Confirmar senha", class: "mb-2 block text-sm font-semibold text-slate-700" %>
+      <%= form.password_field :password_confirmation, autocomplete: "new-password", class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
+    </div>
+    <%= form.submit "Registrar", class: "w-full rounded-full bg-emerald-500 px-5 py-3 text-sm font-bold text-white hover:bg-emerald-600" %>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

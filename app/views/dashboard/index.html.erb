@@ -1,0 +1,61 @@
+<% content_for :title, "Painel" %>
+
+<section class="space-y-8">
+  <div class="grid gap-4 lg:grid-cols-4">
+    <%= render "shared/stats_card", title: "Nível atual", value: @progress[:level], subtitle: "Continue estudando para subir" %>
+    <%= render "shared/stats_card", title: "XP total", value: current_user.xp, subtitle: "Seu progresso acumulado" %>
+    <%= render "shared/stats_card", title: "Sequência", value: "#{current_user.streak} dias", subtitle: "Estudo consistente" %>
+    <%= render "shared/stats_card", title: "Lições concluídas", value: @completed_lessons.size, subtitle: "Seu histórico recente" %>
+  </div>
+
+  <div class="grid gap-8 lg:grid-cols-[1.4fr,1fr]">
+    <div class="space-y-6">
+      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+        <h2 class="text-xl font-black text-slate-900">Seu progresso</h2>
+        <p class="mt-1 text-sm text-slate-600">Falta pouco para o próximo nível.</p>
+        <div class="mt-4">
+          <%= render "shared/progress_bar", percentage: @progress[:percentage], value_label: "#{@progress[:current_xp]} / #{@progress[:next_threshold]} XP" %>
+        </div>
+      </div>
+
+      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+        <h2 class="text-xl font-black text-slate-900">Lições recomendadas</h2>
+        <div class="mt-4 grid gap-4 md:grid-cols-2">
+          <% @recommended_lessons.each do |lesson| %>
+            <%= render "shared/lesson_card", lesson: lesson %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-6">
+      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+        <h2 class="text-xl font-black text-slate-900">Conquistas recentes</h2>
+        <div class="mt-4 space-y-3">
+          <% if @recent_achievements.any? %>
+            <% @recent_achievements.each do |user_achievement| %>
+              <div class="rounded-2xl bg-amber-50 p-4">
+                <p class="font-bold text-slate-900"><%= user_achievement.achievement.name %></p>
+                <p class="text-sm text-slate-600"><%= user_achievement.achievement.description %></p>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text-sm text-slate-600">Conclua sua primeira lição para desbloquear conquistas.</p>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+        <h2 class="text-xl font-black text-slate-900">Últimas lições</h2>
+        <div class="mt-4 space-y-3">
+          <% @completed_lessons.each do |completion| %>
+            <div class="rounded-2xl bg-slate-50 p-4">
+              <p class="font-semibold text-slate-900"><%= completion.lesson.title %></p>
+              <p class="text-sm text-slate-600"><%= completion.lesson.subject.name %> • <%= completion.score %>%</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
