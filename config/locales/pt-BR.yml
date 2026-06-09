@@ -1,0 +1,18 @@
+pt-BR:
+  devise:
+    sessions:
+      signed_in: "Entrou com sucesso."
+      signed_out: "Saiu com sucesso."
+      already_signed_out: "Você já saiu."
+    registrations:
+      signed_up: "Conta criada com sucesso."
+      updated: "Conta atualizada com sucesso."
+    passwords:
+      send_instructions: "Você receberá instruções por e-mail em alguns minutos."
+      updated: "Sua senha foi alterada com sucesso."
+      no_token: "Você só pode acessar esta página a partir do e-mail de redefinição de senha."
+  errors:
+    messages:
+      not_saved:
+        one: "1 erro impediu este %{resource} de ser salvo:"
+        other: "%{count} erros impediram este %{resource} de ser salvo:"

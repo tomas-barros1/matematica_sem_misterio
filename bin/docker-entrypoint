@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+# If running the Rails server then migrate the database before boot.
+if [[ "$*" == *"./bin/rails server"* ]]; then
+  bundle exec rails db:migrate
+fi
+
+exec "${@}"
