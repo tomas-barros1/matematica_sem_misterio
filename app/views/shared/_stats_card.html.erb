@@ -1,0 +1,7 @@
+<div class="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+  <p class="text-sm font-semibold text-slate-500"><%= local_assigns[:title] %></p>
+  <p class="mt-2 text-3xl font-black text-slate-900"><%= local_assigns[:value] %></p>
+  <% if local_assigns[:subtitle].present? %>
+    <p class="mt-2 text-sm text-slate-500"><%= local_assigns[:subtitle] %></p>
+  <% end %>
+</div>

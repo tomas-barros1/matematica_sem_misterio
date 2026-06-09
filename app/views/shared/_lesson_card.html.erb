@@ -1,0 +1,12 @@
+<div class="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+  <p class="text-sm font-semibold text-emerald-700"><%= lesson.subject.name %></p>
+  <h3 class="mt-2 text-xl font-bold text-slate-900"><%= lesson.title %></h3>
+  <p class="mt-2 text-sm text-slate-600"><%= lesson.description %></p>
+  <div class="mt-4 flex items-center justify-between text-sm text-slate-500">
+    <span><%= lesson.questions.size %> questões</span>
+    <span><%= lesson.xp_reward %> XP</span>
+  </div>
+  <div class="mt-4">
+    <%= link_to "Abrir lição", lesson_path(lesson), class: "inline-flex rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-600" %>
+  </div>
+</div>

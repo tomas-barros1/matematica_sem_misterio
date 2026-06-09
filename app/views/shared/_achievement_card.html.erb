@@ -1,0 +1,11 @@
+<div class="rounded-3xl border p-5 <%= local_assigns[:unlocked] ? "border-amber-200 bg-amber-50" : "border-slate-200 bg-white" %>">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <p class="text-lg font-bold text-slate-900"><%= achievement.name %></p>
+      <p class="mt-1 text-sm text-slate-600"><%= achievement.description %></p>
+    </div>
+    <span class="rounded-full px-3 py-1 text-xs font-bold <%= local_assigns[:unlocked] ? "bg-amber-400 text-white" : "bg-slate-200 text-slate-600" %>">
+      <%= local_assigns[:unlocked] ? "Desbloqueada" : "Bloqueada" %>
+    </span>
+  </div>
+</div>
