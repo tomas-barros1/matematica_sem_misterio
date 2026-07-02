@@ -30,10 +30,3 @@ docker run -p 3000:80 -e RAILS_MASTER_KEY=... matematica-sem-misterio
 ```
 
 O container executa `bundle exec rails db:migrate` antes de iniciar o Puma.
-
-## Render
-
-1. Crie um Web Service usando `render.yaml`.
-2. Configure `RAILS_MASTER_KEY`.
-3. Ajuste `APP_HOST` para o domínio do serviço.
-4. Faça o deploy.
