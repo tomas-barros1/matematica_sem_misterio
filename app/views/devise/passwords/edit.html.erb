@@ -1,11 +1,16 @@
 <% content_for :title, "Nova senha" %>
 
-<div class="mx-auto max-w-md rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
-  <h1 class="text-3xl font-black text-slate-900">Criar nova senha</h1>
+<div class="auth-shell reveal">
+  <div class="auth-rail">
+    <p class="math-chip bg-white/15 text-white">Segurança</p>
+    <h1 class="mt-4 text-4xl font-black tracking-tight">Criar nova senha</h1>
+    <p class="mt-3 text-sm leading-6 text-slate-200">Defina uma nova senha para continuar sua jornada.</p>
+  </div>
 
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="p-8">
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <%= form_with scope: resource_name, url: password_path(resource_name), method: :put, class: "mt-6 space-y-4" do |form| %>
+    <%= form_with scope: resource_name, url: password_path(resource_name), method: :put, class: "mt-6 space-y-4" do |form| %>
     <%= hidden_field_tag :reset_password_token, params[:reset_password_token] %>
     <div>
       <%= form.label :password, "Nova senha", class: "mb-2 block text-sm font-semibold text-slate-700" %>
@@ -15,6 +20,7 @@
       <%= form.label :password_confirmation, "Confirmar senha", class: "mb-2 block text-sm font-semibold text-slate-700" %>
       <%= form.password_field :password_confirmation, autocomplete: "new-password", class: "w-full rounded-2xl border-slate-300 px-4 py-3" %>
     </div>
-    <%= form.submit "Alterar senha", class: "w-full rounded-full bg-emerald-500 px-5 py-3 text-sm font-bold text-white hover:bg-emerald-600" %>
-  <% end %>
+      <%= form.submit "Alterar senha", class: "w-full rounded-full bg-emerald-500 px-5 py-3 text-sm font-bold text-white hover:bg-emerald-600" %>
+    <% end %>
+  </div>
 </div>

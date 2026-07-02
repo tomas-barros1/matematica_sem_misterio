@@ -1,0 +1,99 @@
+Table users {
+  id integer [pk, increment]
+  name varchar [not null]
+  email varchar [not null, unique]
+  encrypted_password varchar [not null]
+  reset_password_token varchar [unique]
+  reset_password_sent_at timestamp
+  remember_created_at timestamp
+  role integer [not null, default: 0]
+  xp integer [not null, default: 0]
+  level integer [not null, default: 1]
+  streak integer [not null, default: 0]
+  last_study_at timestamp
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table subjects {
+  id integer [pk, increment]
+  name varchar [not null, unique]
+  description text [not null]
+  position integer [not null, default: 0]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table lessons {
+  id integer [pk, increment]
+  subject_id integer [not null]
+  title varchar [not null]
+  description text [not null]
+  position integer [not null, default: 0]
+  xp_reward integer [not null, default: 50]
+  active boolean [not null, default: true]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table questions {
+  id integer [pk, increment]
+  lesson_id integer [not null]
+  statement text [not null]
+  correct_answer varchar [not null]
+  option_a text
+  option_b text
+  option_c text
+  option_d text
+  kind integer [not null, default: 0]
+  explanation text
+  position integer [not null, default: 0]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table lesson_completions {
+  id integer [pk, increment]
+  user_id integer [not null]
+  lesson_id integer [not null]
+  score integer [not null, default: 0]
+  completed_at timestamp [not null]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (user_id, lesson_id) [unique]
+  }
+}
+
+Table achievements {
+  id integer [pk, increment]
+  code varchar [not null, unique]
+  name varchar [not null, unique]
+  description text [not null]
+  xp_requirement integer [not null, default: 0]
+  streak_requirement integer
+  lesson_completion_requirement integer
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table user_achievements {
+  id integer [pk, increment]
+  user_id integer [not null]
+  achievement_id integer [not null]
+  unlocked_at timestamp [not null]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (user_id, achievement_id) [unique]
+  }
+}
+
+Ref: lessons.subject_id > subjects.id
+Ref: questions.lesson_id > lessons.id
+Ref: lesson_completions.user_id > users.id
+Ref: lesson_completions.lesson_id > lessons.id
+Ref: user_achievements.user_id > users.id
+Ref: user_achievements.achievement_id > achievements.id

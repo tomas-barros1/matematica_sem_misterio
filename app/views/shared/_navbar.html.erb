@@ -1,16 +1,14 @@
-<nav class="border-b border-slate-200 bg-white/90 backdrop-blur">
-  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-    <div class="flex items-center gap-3">
-      <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-500 text-lg font-black text-white">M</div>
-      <div>
-        <%= link_to root_path, class: "block" do %>
-          <p class="text-sm font-semibold text-emerald-700">Matemática Sem Mistério</p>
-          <p class="text-xs text-slate-500">Aprenda brincando</p>
-        <% end %>
+<nav class="sticky top-0 z-40 border-b border-white/60 bg-white/75 backdrop-blur-xl">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+    <%= link_to root_path, class: "group flex items-center gap-3 rounded-full bg-white px-3 py-2 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:ring-emerald-200" do %>
+      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-lime-400 text-lg font-black text-white shadow-md shadow-emerald-200">M</div>
+      <div class="pr-1">
+        <p class="text-sm font-extrabold tracking-tight text-slate-900">Matemática Sem Mistério</p>
+        <p class="text-xs font-medium text-slate-500">Aprenda brincando</p>
       </div>
-    </div>
+    <% end %>
 
-    <div class="flex flex-wrap items-center gap-2">
+    <div class="flex flex-wrap items-center justify-end gap-2">
       <% if user_signed_in? %>
         <%= nav_link_to "Painel", dashboard_path, active_paths: [dashboard_path] %>
         <%= nav_link_to "Lições", lessons_path, active_paths: [lessons_path] %>
@@ -20,10 +18,10 @@
         <% if current_user.admin? %>
           <%= nav_link_to "Admin", admin_subjects_path, active_paths: [admin_subjects_path, admin_lessons_path, admin_questions_path, admin_users_path] %>
         <% end %>
-        <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700" %>
+        <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-800" %>
       <% else %>
         <%= nav_link_to "Entrar", new_user_session_path %>
-        <%= link_to "Criar conta", new_user_registration_path, class: "rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-600" %>
+        <%= link_to "Criar conta", new_user_registration_path, class: "rounded-full bg-gradient-to-r from-emerald-500 to-lime-400 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5" %>
       <% end %>
     </div>
   </div>

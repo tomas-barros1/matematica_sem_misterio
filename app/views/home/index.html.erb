@@ -1,62 +1,78 @@
 <% content_for :title, "Matemática Sem Mistério" %>
 
-<section class="overflow-hidden rounded-[2rem] bg-gradient-to-br from-emerald-500 via-lime-400 to-yellow-300 p-8 text-white shadow-sm sm:p-10">
-  <div class="grid gap-10 lg:grid-cols-[1.2fr,0.8fr] lg:items-center">
-    <div class="space-y-6">
+<section class="reveal overflow-hidden rounded-[2rem] bg-white shadow-sm ring-1 ring-slate-200">
+  <div class="grid gap-0 lg:grid-cols-[1.15fr,0.85fr]">
+    <div class="bg-gradient-to-br from-emerald-500 via-lime-400 to-yellow-300 p-8 text-white sm:p-10">
       <span class="inline-flex rounded-full bg-white/20 px-4 py-2 text-sm font-semibold backdrop-blur">Aprenda matemática com desafios curtos</span>
-      <div class="space-y-4">
+      <div class="mt-6 space-y-4">
         <h1 class="max-w-2xl text-4xl font-black tracking-tight sm:text-5xl">Contas, formas e lógica em uma experiência leve e divertida.</h1>
         <p class="max-w-xl text-lg text-emerald-50">A plataforma para estudantes do ensino fundamental praticarem matemática com XP, conquistas e progresso visual.</p>
       </div>
 
-      <div class="flex flex-wrap gap-3">
-        <%= link_to "Começar agora", new_user_registration_path, class: "rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white hover:bg-slate-800" %>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <%= link_to "Começar agora", new_user_registration_path, class: "rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-slate-900/20 hover:bg-slate-800" %>
         <%= link_to "Entrar", new_user_session_path, class: "rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-900 hover:bg-slate-100" %>
       </div>
     </div>
 
-    <div class="grid gap-4 sm:grid-cols-2">
-      <div class="rounded-3xl bg-white/20 p-5 backdrop-blur">
-        <p class="text-sm font-semibold text-white/90">Exemplo rápido</p>
-        <p class="mt-4 text-4xl font-black">2 + 3 = 5</p>
+    <div class="grid gap-4 bg-slate-50 p-6 sm:grid-cols-2">
+      <div class="rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
+        <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">Exemplo rápido</p>
+        <p class="mt-4 text-4xl font-black text-slate-900">2 + 3</p>
+        <p class="mt-2 text-sm text-slate-500">Usando blocos e lógica visual</p>
       </div>
-      <div class="rounded-3xl bg-white/20 p-5 backdrop-blur">
-        <p class="text-sm font-semibold text-white/90">Tabuada</p>
-        <p class="mt-4 text-4xl font-black">2 x 4 = 8</p>
+      <div class="rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
+        <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">Tabuada</p>
+        <p class="mt-4 text-4xl font-black text-slate-900">2 × 4</p>
+        <p class="mt-2 text-sm text-slate-500">Treino rápido para fixação</p>
       </div>
-      <div class="rounded-3xl bg-white/20 p-5 backdrop-blur">
-        <p class="text-sm font-semibold text-white/90">Geometria</p>
-        <p class="mt-4 text-4xl font-black">△ □ ○</p>
+      <div class="rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
+        <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">Geometria</p>
+        <p class="mt-4 text-4xl font-black text-slate-900">△ □ ○</p>
+        <p class="mt-2 text-sm text-slate-500">Reconheça formas e lados</p>
       </div>
-      <div class="rounded-3xl bg-white/20 p-5 backdrop-blur">
-        <p class="text-sm font-semibold text-white/90">Progresso</p>
-        <p class="mt-4 text-4xl font-black">XP + nível</p>
+      <div class="rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
+        <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">Progresso</p>
+        <p class="mt-4 text-4xl font-black text-slate-900">XP + nível</p>
+        <p class="mt-2 text-sm text-slate-500">Continue evoluindo todos os dias</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="mt-10 grid gap-4 md:grid-cols-3">
+<section class="mt-8 grid gap-4 md:grid-cols-3">
   <%= render "shared/stats_card", title: "Lições", value: Lesson.count, subtitle: "Trilhas de matemática" %>
   <%= render "shared/stats_card", title: "Questões", value: Question.count, subtitle: "Prática guiada" %>
   <%= render "shared/stats_card", title: "Conquistas", value: Achievement.count, subtitle: "Metas para evoluir" %>
 </section>
 
-<section class="mt-12 space-y-5">
-  <div>
-    <h2 class="text-2xl font-black text-slate-900">Lições em destaque</h2>
-    <p class="text-slate-600">Escolha um tema e comece a treinar agora.</p>
+<section class="mt-10 space-y-5">
+  <div class="flex items-end justify-between gap-4">
+    <div>
+      <h2 class="section-heading">Lições em destaque</h2>
+      <p class="section-subtitle">Escolha um tema e comece a treinar agora.</p>
+    </div>
   </div>
 
   <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
     <% @featured_subjects.each do |subject| %>
-      <div class="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
-        <p class="text-sm font-semibold text-emerald-700"><%= subject.lessons.size %> lições</p>
-        <h3 class="mt-2 text-xl font-bold text-slate-900"><%= subject.name %></h3>
-        <p class="mt-2 text-sm text-slate-600"><%= subject.description %></p>
-        <div class="mt-4 rounded-2xl bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">
+      <div class="rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
+        <p class="text-sm font-bold uppercase tracking-wide text-emerald-700"><%= subject.lessons.size %> lições</p>
+        <h3 class="mt-2 text-xl font-black tracking-tight text-slate-900"><%= subject.name %></h3>
+        <p class="mt-2 text-sm leading-6 text-slate-600"><%= subject.description %></p>
+        <div class="mt-5 rounded-2xl bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">
           Matemática para aprender brincando
         </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="grid gap-4 lg:grid-cols-3">
+    <% @top_students.each_with_index do |user, index| %>
+      <div class="rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
+        <p class="text-sm font-bold uppercase tracking-wide text-slate-500">Destaques</p>
+        <p class="mt-3 text-lg font-black text-slate-900"><%= user.display_name %></p>
+        <p class="mt-1 text-sm text-slate-500">Posição <%= index + 1 %> • <%= user.xp %> XP</p>
       </div>
     <% end %>
   </div>

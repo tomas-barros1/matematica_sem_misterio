@@ -1,6 +1,26 @@
 <% content_for :title, "Painel" %>
 
 <section class="space-y-8">
+  <div class="reveal rounded-[2rem] bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 p-6 text-white shadow-sm sm:p-8">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-200">Seu painel</p>
+        <h1 class="mt-2 text-3xl font-black tracking-tight sm:text-4xl">Continue a sequência e suba de nível.</h1>
+        <p class="mt-2 max-w-2xl text-sm text-slate-300">Tudo o que você precisa para acompanhar XP, lições concluídas e conquistas em um só lugar.</p>
+      </div>
+      <div class="grid grid-cols-2 gap-3 sm:min-w-80">
+        <div class="rounded-3xl bg-white/10 p-4 backdrop-blur">
+          <p class="text-xs font-semibold uppercase tracking-wide text-slate-300">Nível</p>
+          <p class="mt-2 text-3xl font-black"><%= @progress[:level] %></p>
+        </div>
+        <div class="rounded-3xl bg-white/10 p-4 backdrop-blur">
+          <p class="text-xs font-semibold uppercase tracking-wide text-slate-300">XP</p>
+          <p class="mt-2 text-3xl font-black"><%= current_user.xp %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="grid gap-4 lg:grid-cols-4">
     <%= render "shared/stats_card", title: "Nível atual", value: @progress[:level], subtitle: "Continue estudando para subir" %>
     <%= render "shared/stats_card", title: "XP total", value: current_user.xp, subtitle: "Seu progresso acumulado" %>
@@ -8,18 +28,30 @@
     <%= render "shared/stats_card", title: "Lições concluídas", value: @completed_lessons.size, subtitle: "Seu histórico recente" %>
   </div>
 
-  <div class="grid gap-8 lg:grid-cols-[1.4fr,1fr]">
+  <div class="grid gap-8 lg:grid-cols-[1.3fr,0.9fr]">
     <div class="space-y-6">
-      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-        <h2 class="text-xl font-black text-slate-900">Seu progresso</h2>
-        <p class="mt-1 text-sm text-slate-600">Falta pouco para o próximo nível.</p>
+      <div class="surface-panel reveal p-6">
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-black tracking-tight text-slate-900">Seu progresso</h2>
+            <p class="mt-1 text-sm text-slate-600">Falta pouco para o próximo nível.</p>
+          </div>
+          <div class="rounded-2xl bg-emerald-50 px-3 py-2 text-sm font-bold text-emerald-700">
+            <%= @progress[:percentage] %>%
+          </div>
+        </div>
         <div class="mt-4">
           <%= render "shared/progress_bar", percentage: @progress[:percentage], value_label: "#{@progress[:current_xp]} / #{@progress[:next_threshold]} XP" %>
         </div>
       </div>
 
-      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-        <h2 class="text-xl font-black text-slate-900">Lições recomendadas</h2>
+      <div class="surface-panel reveal p-6">
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-black tracking-tight text-slate-900">Lições recomendadas</h2>
+            <p class="mt-1 text-sm text-slate-600">Retome de onde parou ou explore outra trilha.</p>
+          </div>
+        </div>
         <div class="mt-4 grid gap-4 md:grid-cols-2">
           <% @recommended_lessons.each do |lesson| %>
             <%= render "shared/lesson_card", lesson: lesson %>
@@ -29,12 +61,15 @@
     </div>
 
     <div class="space-y-6">
-      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-        <h2 class="text-xl font-black text-slate-900">Conquistas recentes</h2>
+      <div class="surface-panel reveal p-6">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-black tracking-tight text-slate-900">Conquistas recentes</h2>
+          <span class="rounded-full bg-amber-50 px-3 py-1 text-xs font-bold uppercase tracking-wide text-amber-700">Novo</span>
+        </div>
         <div class="mt-4 space-y-3">
           <% if @recent_achievements.any? %>
             <% @recent_achievements.each do |user_achievement| %>
-              <div class="rounded-2xl bg-amber-50 p-4">
+              <div class="rounded-2xl bg-gradient-to-r from-amber-50 to-white p-4 ring-1 ring-amber-100">
                 <p class="font-bold text-slate-900"><%= user_achievement.achievement.name %></p>
                 <p class="text-sm text-slate-600"><%= user_achievement.achievement.description %></p>
               </div>
@@ -45,8 +80,8 @@
         </div>
       </div>
 
-      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-        <h2 class="text-xl font-black text-slate-900">Últimas lições</h2>
+      <div class="surface-panel reveal p-6">
+        <h2 class="text-xl font-black tracking-tight text-slate-900">Últimas lições</h2>
         <div class="mt-4 space-y-3">
           <% @completed_lessons.each do |completion| %>
             <div class="rounded-2xl bg-slate-50 p-4">

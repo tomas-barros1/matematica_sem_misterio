@@ -1,8 +1,8 @@
 <% if flash.any? %>
-  <div class="mx-auto mt-4 max-w-7xl space-y-3 px-4 sm:px-6 lg:px-8">
+  <div class="mx-auto mt-4 max-w-6xl space-y-3 px-4 sm:px-6 lg:px-8">
     <% flash.each do |type, message| %>
       <% next if message.blank? %>
-      <div class="rounded-2xl border px-4 py-3 text-sm font-medium <%= type.to_sym == :alert ? "border-rose-200 bg-rose-50 text-rose-700" : "border-emerald-200 bg-emerald-50 text-emerald-700" %>">
+      <div class="surface-panel px-4 py-3 text-sm font-medium <%= type.to_sym == :alert ? "text-rose-700" : "text-emerald-700" %>">
         <%= message %>
       </div>
     <% end %>
