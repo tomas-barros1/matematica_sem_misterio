@@ -15,7 +15,13 @@ class Question < ApplicationRecord
   end
 
   def correct_option_label
-    multiple_choice? ? correct_answer : (correct_answer == "true" ? "Verdadeiro" : "Falso")
+    answer_label(correct_answer)
+  end
+
+  def answer_label(answer)
+    return answer == "true" ? "Verdadeiro" : "Falso" if true_false?
+
+    option_pairs.to_h[answer.to_s]
   end
 
   def answer_correct?(submitted_answer)

@@ -16,6 +16,7 @@ class LessonCompletionService
       score = total_questions.zero? ? 0 : ((correct_answers.to_f / total_questions) * 100).round
       completion = user.lesson_completions.find_or_initialize_by(lesson: lesson)
       completion.score = score
+      completion.answers = answers
       completion.completed_at = Time.current
       completion.save!
 

@@ -6,50 +6,113 @@
     <h1 class="mt-2 text-3xl font-black text-slate-900"><%= @lesson.title %></h1>
     <p class="mt-2 text-slate-600"><%= @lesson.description %></p>
     <div class="mt-4 flex flex-wrap gap-3 text-sm font-semibold text-slate-600">
-      <span class="rounded-full bg-emerald-100 px-3 py-1 text-emerald-700"><%= @lesson.questions.size %> questões</span>
-      <span class="rounded-full bg-slate-100 px-3 py-1"><%= @lesson.xp_reward %> XP</span>
+      <span class="rounded-full bg-emerald-100 px-3 py-1 text-emerald-700"><%= @lesson.questions.size %>
+        questões</span>
+      <span class="rounded-full bg-slate-100 px-3 py-1"><%= @lesson.xp_reward %>
+        XP</span>
       <% if @completion.present? %>
-        <span class="rounded-full bg-amber-100 px-3 py-1 text-amber-800">Concluída: <%= @completion.score %>%</span>
+        <span class="rounded-full bg-amber-100 px-3 py-1 text-amber-800">Concluída:
+          <%= @completion.score %>%</span>
       <% end %>
     </div>
   </div>
 
+  <% if @completion.present? %>
+    <section class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200" aria-label="Correção da lição">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <p class="text-sm font-semibold text-emerald-700">Correção da sua tentativa</p>
+          <h2 class="mt-1 text-2xl font-black text-slate-900"><%= @completion.score %>% de acertos</h2>
+        </div>
+        <span class="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-700">
+          <%= @lesson.questions.count { |question| question.answer_correct?(@completion.answers[question.id.to_s]) } %> de <%= @lesson.questions.size %> corretas
+        </span>
+      </div>
+
+      <div class="mt-5 space-y-3">
+        <% @lesson.questions.each_with_index do |question, index| %>
+          <% submitted_answer = @completion.answers[question.id.to_s] %>
+          <% correct = question.answer_correct?(submitted_answer) %>
+          <article class="rounded-2xl border p-4 <%= correct ? "border-emerald-200 bg-emerald-50" : "border-rose-200 bg-rose-50" %>">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="font-bold text-slate-900">Questão <%= index + 1 %>: <%= question.statement %></h3>
+              <span class="rounded-full px-3 py-1 text-sm font-bold <%= correct ? "bg-emerald-200 text-emerald-900" : "bg-rose-200 text-rose-900" %>">
+                <%= correct ? "Você acertou" : "Você errou" %>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-slate-700">Sua resposta: <strong><%= question.answer_label(submitted_answer) || "Não respondida" %></strong></p>
+            <% unless correct %>
+              <p class="mt-1 text-sm text-slate-700">Resposta correta: <strong><%= question.correct_option_label %></strong></p>
+            <% end %>
+            <% if question.explanation.present? %>
+              <p class="mt-3 text-sm text-slate-600"><strong>Explicação:</strong> <%= question.explanation %></p>
+            <% end %>
+          </article>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+
   <%= form_with url: lesson_completion_path(@lesson), scope: :lesson_completion, method: :post, class: "space-y-4" do %>
     <% @lesson.questions.each_with_index do |question, index| %>
       <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-        <p class="text-sm font-semibold text-slate-500">Questão <%= index + 1 %></p>
+        <p class="text-sm font-semibold text-slate-500">Questão
+          <%= index + 1 %></p>
         <h2 class="mt-2 text-xl font-bold text-slate-900"><%= question.statement %></h2>
 
         <% if question.multiple_choice? %>
           <div class="mt-4 grid gap-3">
             <% question.option_pairs.each do |label, option| %>
-              <label class="flex cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 hover:border-emerald-300">
-                <%= radio_button_tag "lesson_completion[answers][#{question.id}]", label, false, class: "h-4 w-4 text-emerald-600" %>
+              <label
+                class="
+                  flex cursor-pointer items-center gap-3 rounded-2xl border border-slate-200
+                  bg-slate-50 px-4 py-3 hover:border-emerald-300
+                "
+              >
+                <%= radio_button_tag "lesson_completion[answers][#{question.id}]",
+                label,
+                false,
+                class: "h-4 w-4 text-emerald-600" %>
                 <span class="font-medium text-slate-700"><%= option %></span>
               </label>
             <% end %>
           </div>
         <% else %>
           <div class="mt-4 flex gap-3">
-            <label class="flex flex-1 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 hover:border-emerald-300">
-              <%= radio_button_tag "lesson_completion[answers][#{question.id}]", "true", false, class: "h-4 w-4 text-emerald-600" %>
+            <label
+              class="
+                flex flex-1 cursor-pointer items-center gap-3 rounded-2xl border
+                border-slate-200 bg-slate-50 px-4 py-3 hover:border-emerald-300
+              "
+            >
+              <%= radio_button_tag "lesson_completion[answers][#{question.id}]",
+              "true",
+              false,
+              class: "h-4 w-4 text-emerald-600" %>
               <span class="font-medium text-slate-700">Verdadeiro</span>
             </label>
-            <label class="flex flex-1 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 hover:border-emerald-300">
-              <%= radio_button_tag "lesson_completion[answers][#{question.id}]", "false", false, class: "h-4 w-4 text-emerald-600" %>
+            <label
+              class="
+                flex flex-1 cursor-pointer items-center gap-3 rounded-2xl border
+                border-slate-200 bg-slate-50 px-4 py-3 hover:border-emerald-300
+              "
+            >
+              <%= radio_button_tag "lesson_completion[answers][#{question.id}]",
+              "false",
+              false,
+              class: "h-4 w-4 text-emerald-600" %>
               <span class="font-medium text-slate-700">Falso</span>
             </label>
           </div>
         <% end %>
 
-        <% if question.explanation.present? %>
-          <p class="mt-4 text-sm text-slate-500"><%= question.explanation %></p>
-        <% end %>
       </div>
     <% end %>
 
     <div class="flex justify-end">
-      <%= submit_tag "Finalizar lição", class: "rounded-full bg-emerald-500 px-6 py-3 text-sm font-bold text-white hover:bg-emerald-600" %>
+      <%= submit_tag "Finalizar lição",
+      class:
+        "rounded-full bg-emerald-500 px-6 py-3 text-sm font-bold text-white hover:bg-emerald-600" %>
     </div>
   <% end %>
 </div>
