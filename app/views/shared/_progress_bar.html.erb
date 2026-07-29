@@ -3,7 +3,7 @@
     <span><%= local_assigns.fetch(:label, "Progresso") %></span>
     <span><%= local_assigns.fetch(:value_label, "#{local_assigns[:percentage]}%") %></span>
   </div>
-  <div class="h-3 overflow-hidden rounded-full bg-slate-200">
-    <div class="h-full rounded-full bg-emerald-500" style="width: <%= local_assigns.fetch(:percentage, 0) %>%"></div>
+  <div class="h-3 overflow-hidden rounded-full bg-[#dce7de]">
+    <div class="h-full rounded-full bg-[#2454a6]" style="width: <%= local_assigns.fetch(:percentage, 0) %>%"></div>
   </div>
 </div>

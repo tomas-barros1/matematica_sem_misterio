@@ -1,79 +1,155 @@
-<% content_for :title, "Matemática Sem Mistério" %>
+<% content_for :title, "Matemática Sem Mistério | Aprender fazendo" %>
+<% content_for :head do %>
+  <meta name="description" content="Desafios de matemática para crianças e jovens aprenderem fazendo, com explicações, progresso e conquistas.">
+  <meta property="og:title" content="Matemática Sem Mistério">
+  <meta property="og:description" content="Aprenda matemática fazendo, testando e entendendo cada resposta.">
+<% end %>
+<% cta_path = user_signed_in? ? dashboard_path : new_user_registration_path %>
+<% cta_label = user_signed_in? ? "Ir para meu painel" : "Começar gratuitamente" %>
 
-<section class="reveal overflow-hidden rounded-[2rem] bg-white shadow-sm ring-1 ring-slate-200">
-  <div class="grid gap-0 lg:grid-cols-[1.15fr,0.85fr]">
-    <div class="bg-gradient-to-br from-emerald-500 via-lime-400 to-yellow-300 p-8 text-white sm:p-10">
-      <span class="inline-flex rounded-full bg-white/20 px-4 py-2 text-sm font-semibold backdrop-blur">Aprenda matemática com desafios curtos</span>
-      <div class="mt-6 space-y-4">
-        <h1 class="max-w-2xl text-4xl font-black tracking-tight sm:text-5xl">Contas, formas e lógica em uma experiência leve e divertida.</h1>
-        <p class="max-w-xl text-lg text-emerald-50">A plataforma para estudantes do ensino fundamental praticarem matemática com XP, conquistas e progresso visual.</p>
-      </div>
-
+<section class="reveal relative overflow-hidden rounded-[2rem] border-2 border-[#3565db] bg-white shadow-[0_8px_0_rgba(53,101,219,0.18)]" aria-labelledby="home-hero-title">
+  <div class="grid lg:grid-cols-[1.08fr,.92fr]">
+    <div class="p-8 sm:p-12 lg:p-14">
+      <p class="math-chip">Matemática para mentes curiosas</p>
+      <h1 id="home-hero-title" class="mt-5 max-w-2xl text-5xl font-black leading-[.94] text-[#14213d] sm:text-6xl">Aprenda testando. <span class="text-[#3565db]">Entenda jogando.</span></h1>
+      <p class="mt-6 max-w-xl text-lg leading-8 text-[#607083]">Desafios curtos para crianças e jovens descobrirem como os números funcionam — com explicações claras a cada tentativa.</p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <%= link_to "Começar agora", new_user_registration_path, class: "rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-slate-900/20 hover:bg-slate-800" %>
-        <%= link_to "Entrar", new_user_session_path, class: "rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-900 hover:bg-slate-100" %>
+        <%= link_to cta_label, cta_path, class: "button-primary" %>
+        <a href="#como-funciona" class="button-secondary">Ver como funciona</a>
       </div>
+      <p class="mt-5 text-sm font-medium text-[#607083]">Sem pressa. Cada resposta é uma pista para a próxima descoberta.</p>
     </div>
 
-    <div class="grid gap-4 bg-slate-50 p-6 sm:grid-cols-2">
-      <div class="rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
-        <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">Exemplo rápido</p>
-        <p class="mt-4 text-4xl font-black text-slate-900">2 + 3</p>
-        <p class="mt-2 text-sm text-slate-500">Usando blocos e lógica visual</p>
+    <div class="math-playground flex flex-col justify-center p-7 sm:p-10">
+      <p class="text-xs font-bold uppercase tracking-[.18em] text-[#c8f0d8]">Missão de hoje</p>
+      <p class="mt-4 font-mono text-6xl font-black tracking-[-.1em] sm:text-8xl">3 × 4<span class="text-[#ffcd3c]"> = 12</span></p>
+      <div class="mt-8 grid max-w-sm grid-cols-3 gap-3" aria-label="Doze blocos organizados em três grupos de quatro">
+        <% 12.times do %>
+          <span class="math-block" aria-hidden="true"></span>
+        <% end %>
       </div>
-      <div class="rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
-        <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">Tabuada</p>
-        <p class="mt-4 text-4xl font-black text-slate-900">2 × 4</p>
-        <p class="mt-2 text-sm text-slate-500">Treino rápido para fixação</p>
-      </div>
-      <div class="rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
-        <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">Geometria</p>
-        <p class="mt-4 text-4xl font-black text-slate-900">△ □ ○</p>
-        <p class="mt-2 text-sm text-slate-500">Reconheça formas e lados</p>
-      </div>
-      <div class="rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
-        <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">Progresso</p>
-        <p class="mt-4 text-4xl font-black text-slate-900">XP + nível</p>
-        <p class="mt-2 text-sm text-slate-500">Continue evoluindo todos os dias</p>
-      </div>
+      <p class="mt-7 max-w-sm text-sm leading-6 text-blue-100">Três grupos de quatro blocos: você vê a multiplicação antes mesmo de decorar a conta.</p>
     </div>
   </div>
 </section>
 
-<section class="mt-8 grid gap-4 md:grid-cols-3">
-  <%= render "shared/stats_card", title: "Lições", value: Lesson.count, subtitle: "Trilhas de matemática" %>
-  <%= render "shared/stats_card", title: "Questões", value: Question.count, subtitle: "Prática guiada" %>
-  <%= render "shared/stats_card", title: "Conquistas", value: Achievement.count, subtitle: "Metas para evoluir" %>
+<section class="mt-8 grid gap-4 sm:grid-cols-3" aria-label="Números da plataforma">
+  <%= render "shared/stats_card", title: "Lições", value: Lesson.count, subtitle: "Missões para explorar" %>
+  <%= render "shared/stats_card", title: "Questões", value: Question.count, subtitle: "Desafios para praticar" %>
+  <%= render "shared/stats_card", title: "Conquistas", value: Achievement.count, subtitle: "Metas para comemorar" %>
 </section>
 
-<section class="mt-10 space-y-5">
-  <div class="flex items-end justify-between gap-4">
-    <div>
-      <h2 class="section-heading">Lições em destaque</h2>
-      <p class="section-subtitle">Escolha um tema e comece a treinar agora.</p>
-    </div>
+<section id="como-funciona" class="mt-16 scroll-mt-24" aria-labelledby="how-it-works-title">
+  <div class="max-w-2xl">
+    <p class="math-chip">Um caminho simples</p>
+    <h2 id="how-it-works-title" class="mt-3 section-heading">A ideia é entender, não só acertar.</h2>
+    <p class="section-subtitle">Cada lição combina uma pergunta, uma escolha e uma explicação para tornar o raciocínio visível.</p>
   </div>
 
-  <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+  <div class="mt-7 grid gap-4 md:grid-cols-3">
+    <article class="notebook-card">
+      <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-[#3565db] bg-[#dce8ff] font-mono text-xl font-black text-[#3565db]">1</span>
+      <h3 class="mt-5 text-xl font-black text-[#14213d]">Escolha uma missão</h3>
+      <p class="mt-2 leading-6 text-[#607083]">Adição, geometria, lógica e outros temas organizados em lições curtas.</p>
+    </article>
+    <article class="notebook-card">
+      <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-[#ff7965] bg-[#fff0ed] font-mono text-xl font-black text-[#c85040]">2</span>
+      <h3 class="mt-5 text-xl font-black text-[#14213d]">Teste sua ideia</h3>
+      <p class="mt-2 leading-6 text-[#607083]">Responda no seu ritmo. Errar faz parte de descobrir uma estratégia melhor.</p>
+    </article>
+    <article class="notebook-card">
+      <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-[#cc9414] bg-[#fff5cf] font-mono text-xl font-black text-[#856111]">3</span>
+      <h3 class="mt-5 text-xl font-black text-[#14213d]">Veja o porquê</h3>
+      <p class="mt-2 leading-6 text-[#607083]">Confira a correção e a explicação para levar a ideia para o próximo desafio.</p>
+    </article>
+  </div>
+</section>
+
+<section class="mt-16" aria-labelledby="subjects-title">
+  <div class="flex flex-wrap items-end justify-between gap-5">
+    <div class="max-w-2xl">
+      <p class="math-chip">Comece por onde quiser</p>
+      <h2 id="subjects-title" class="mt-3 section-heading">Temas para investigar agora</h2>
+      <p class="section-subtitle">Escolha uma trilha e transforme curiosidade em prática.</p>
+    </div>
+    <%= link_to "Ver todas as lições", lessons_path, class: "button-secondary" %>
+  </div>
+
+  <div class="mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
     <% @featured_subjects.each do |subject| %>
-      <div class="rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
-        <p class="text-sm font-bold uppercase tracking-wide text-emerald-700"><%= subject.lessons.size %> lições</p>
-        <h3 class="mt-2 text-xl font-black tracking-tight text-slate-900"><%= subject.name %></h3>
-        <p class="mt-2 text-sm leading-6 text-slate-600"><%= subject.description %></p>
-        <div class="mt-5 rounded-2xl bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">
-          Matemática para aprender brincando
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="grid gap-4 lg:grid-cols-3">
-    <% @top_students.each_with_index do |user, index| %>
-      <div class="rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
-        <p class="text-sm font-bold uppercase tracking-wide text-slate-500">Destaques</p>
-        <p class="mt-3 text-lg font-black text-slate-900"><%= user.display_name %></p>
-        <p class="mt-1 text-sm text-slate-500">Posição <%= index + 1 %> • <%= user.xp %> XP</p>
-      </div>
+      <article class="notebook-card flex min-h-60 flex-col">
+        <p class="text-sm font-bold uppercase tracking-wide text-[#3565db]"><%= subject.lessons.size %> lições</p>
+        <h3 class="mt-3 text-2xl font-black text-[#14213d]"><%= subject.name %></h3>
+        <p class="mt-3 flex-1 text-sm leading-6 text-[#607083]"><%= subject.description %></p>
+        <%= link_to "Explorar tema", subject_path(subject), class: "mt-6 inline-flex w-fit items-center gap-2 font-extrabold text-[#3565db] hover:gap-3" %>
+      </article>
     <% end %>
   </div>
 </section>
+
+<section class="mt-16 grid gap-6 lg:grid-cols-[.9fr,1.1fr]" aria-labelledby="progress-title">
+  <div class="rounded-[1.75rem] border-2 border-[#14213d] bg-[#14213d] p-8 text-white shadow-[0_7px_0_rgba(20,33,61,0.18)]">
+    <p class="text-sm font-bold uppercase tracking-[.14em] text-[#c8f0d8]">Progresso que aparece</p>
+    <h2 id="progress-title" class="mt-4 text-3xl font-black leading-tight">Cada lição concluída vira XP, sequência e uma nova conquista.</h2>
+    <p class="mt-4 max-w-md leading-7 text-slate-300">Acompanhe seu caminho sem competição obrigatória: o objetivo é ir um pouco além do que você sabia ontem.</p>
+    <%= link_to cta_label, cta_path, class: "mt-7 inline-flex rounded-full bg-[#ffcd3c] px-5 py-3 text-sm font-extrabold text-[#14213d] shadow-[0_3px_0_#cc9414]" %>
+  </div>
+
+  <div class="notebook-card p-7">
+    <div class="flex items-center justify-between gap-3">
+      <div>
+        <p class="math-chip">Quem está praticando</p>
+        <h2 class="mt-3 text-2xl font-black text-[#14213d]">Destaques da comunidade</h2>
+      </div>
+      <%= link_to "Ranking", ranking_index_path, class: "text-sm font-extrabold text-[#3565db]" %>
+    </div>
+
+    <% if @top_students.any? %>
+      <ol class="mt-5 space-y-3">
+        <% @top_students.each_with_index do |user, index| %>
+          <li class="flex items-center justify-between gap-3 rounded-xl border border-[#cbdcf4] bg-[#f8fbff] px-4 py-3">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 items-center justify-center rounded-full bg-[#dce8ff] font-black text-[#3565db]"><%= index + 1 %></span>
+              <span class="font-bold text-[#14213d]"><%= user.display_name %></span>
+            </div>
+            <span class="text-sm font-bold text-[#607083]"><%= user.xp %> XP</span>
+          </li>
+        <% end %>
+      </ol>
+    <% else %>
+      <p class="mt-5 rounded-xl border border-[#cbdcf4] bg-[#f8fbff] p-4 text-sm text-[#607083]">Seja a primeira pessoa a concluir uma lição.</p>
+    <% end %>
+  </div>
+</section>
+
+<section class="mt-16" aria-labelledby="faq-title">
+  <div class="max-w-2xl">
+    <p class="math-chip">Dúvidas comuns</p>
+    <h2 id="faq-title" class="mt-3 section-heading">Pergunte à vontade.</h2>
+  </div>
+  <div class="mt-7 grid gap-3 lg:grid-cols-2">
+    <% [
+      [ "Para qual idade é a plataforma?", "As lições foram pensadas principalmente para crianças e jovens do ensino fundamental, com linguagem simples e desafios graduais." ],
+      [ "Posso errar uma resposta?", "Pode, e deve tentar. Ao finalizar a lição, você vê a resposta correta e a explicação de cada questão." ],
+      [ "Como acompanho meu avanço?", "Seu painel mostra XP, nível, sequência de estudos, lições concluídas e conquistas desbloqueadas." ],
+      [ "É preciso começar por uma matéria específica?", "Não. Escolha a trilha que faz sentido para você e avance no seu próprio ritmo." ]
+    ].each do |question, answer| %>
+      <details class="group rounded-2xl border-2 border-[#cbdcf4] bg-white p-5 open:border-[#3565db]">
+        <summary class="cursor-pointer list-none pr-8 font-bold text-[#14213d] marker:content-none"><%= question %><span class="float-right -mr-8 text-xl text-[#3565db] group-open:rotate-45">+</span></summary>
+        <p class="mt-3 leading-6 text-[#607083]"><%= answer %></p>
+      </details>
+    <% end %>
+  </div>
+</section>
+
+<section class="mt-16 rounded-[1.75rem] border-2 border-[#ff7965] bg-[#fff0ed] p-8 text-center shadow-[0_6px_0_rgba(255,121,101,0.18)] sm:p-12" aria-labelledby="final-cta-title">
+  <p class="font-mono text-lg font-black text-[#c85040]">2 + curiosidade = descoberta</p>
+  <h2 id="final-cta-title" class="mx-auto mt-3 max-w-2xl text-3xl font-black text-[#14213d] sm:text-4xl">Pronto para transformar “não sei” em “agora entendi”?</h2>
+  <p class="mx-auto mt-4 max-w-xl leading-7 text-[#607083]">Comece com uma lição curta e descubra quanto você consegue resolver.</p>
+  <%= link_to cta_label, cta_path, class: "button-primary mt-7" %>
+</section>
+
+<footer class="mt-12 border-t-2 border-[#cbdcf4] py-8 text-center text-sm text-[#607083]">
+  <p class="font-bold text-[#14213d]">Matemática Sem Mistério</p>
+  <p class="mt-2">Aprender matemática pode ser uma aventura de cada vez.</p>
+</footer>

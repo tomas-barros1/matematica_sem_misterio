@@ -8,12 +8,12 @@
 
   <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
     <% @subjects.each do |subject| %>
-      <div class="surface-panel floating-card p-6">
-        <p class="text-sm font-semibold text-emerald-700"><%= subject.lessons.size %> lições</p>
-        <h2 class="mt-2 text-2xl font-black text-slate-900"><%= subject.name %></h2>
-        <p class="mt-2 text-sm text-slate-600"><%= subject.description %></p>
+      <div class="notebook-card floating-card">
+        <p class="text-sm font-semibold text-[#2454a6]"><%= subject.lessons.size %> lições</p>
+        <h2 class="mt-2 text-2xl font-black text-[#14213d]"><%= subject.name %></h2>
+        <p class="mt-2 text-sm text-[#607083]"><%= subject.description %></p>
         <div class="mt-5">
-          <%= link_to "Ver disciplina", subject_path(subject), class: "rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-600" %>
+          <%= link_to "Ver disciplina", subject_path(subject), class: "button-primary px-4 py-2" %>
         </div>
       </div>
     <% end %>

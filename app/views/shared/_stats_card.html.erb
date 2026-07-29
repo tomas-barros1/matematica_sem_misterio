@@ -1,12 +1,12 @@
-<div class="surface-panel floating-card p-5">
+<div class="notebook-card floating-card">
   <div class="mb-4 flex items-center justify-between">
-    <p class="text-sm font-semibold uppercase tracking-wide text-slate-500"><%= local_assigns[:title] %></p>
-    <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700">
-      <span class="text-lg font-black">•</span>
+    <p class="text-sm font-semibold uppercase tracking-wide text-[#607083]"><%= local_assigns[:title] %></p>
+    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#cfe6d5] text-[#2454a6]">
+      <span class="font-mono text-lg font-black">+</span>
     </div>
   </div>
-  <p class="text-3xl font-black text-slate-900"><%= local_assigns[:value] %></p>
+  <p class="text-3xl font-black text-[#14213d]"><%= local_assigns[:value] %></p>
   <% if local_assigns[:subtitle].present? %>
-    <p class="mt-2 text-sm text-slate-500"><%= local_assigns[:subtitle] %></p>
+    <p class="mt-2 text-sm text-[#607083]"><%= local_assigns[:subtitle] %></p>
   <% end %>
 </div>

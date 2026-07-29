@@ -2,108 +2,117 @@
 
 @layer base {
   :root {
-    --canvas: #f8fafc;
-    --ink: #0f172a;
-    --accent: #10b981;
-    --accent-soft: #d1fae5;
-    --accent-warm: #fde68a;
+    --paper: #eef7ff;
+    --paper-bright: #ffffff;
+    --ink: #14213d;
+    --muted: #607083;
+    --blue: #3565db;
+    --blue-deep: #1d3c91;
+    --sun: #ffcd3c;
+    --coral: #ff7965;
+    --mint: #c8f0d8;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   body.app-canvas {
-    background:
-      radial-gradient(circle at top left, rgba(16, 185, 129, 0.13), transparent 30%),
-      radial-gradient(circle at top right, rgba(250, 204, 21, 0.12), transparent 24%),
-      linear-gradient(180deg, #f0fdf4 0%, #f8fafc 28%, #f8fafc 100%);
+    min-width: 320px;
+    background-color: var(--paper);
+    background-image: radial-gradient(rgba(53, 101, 219, .11) 1px, transparent 1px);
+    background-size: 19px 19px;
     color: var(--ink);
-    font-family: "Trebuchet MS", "Gill Sans", "Helvetica Neue", sans-serif;
+    font-family: "Roboto", Arial, sans-serif;
   }
 
   h1, h2, h3, h4 {
-    font-family: Georgia, "Times New Roman", serif;
-    letter-spacing: -0.02em;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 900;
+    letter-spacing: -.035em;
   }
 
-  ::selection {
-    background: rgba(16, 185, 129, 0.95);
-    color: white;
+  input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+  textarea,
+  select {
+    border: 2px solid #b9caf0;
   }
+
+  a, button, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+  ::selection { background: var(--sun); color: var(--ink); }
 }
 
 @layer components {
   .app-grid {
-    position: fixed;
-    inset: 0;
-    z-index: -20;
-    pointer-events: none;
-    opacity: 0.45;
-    background-image:
-      linear-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
-    background-size: 52px 52px;
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), transparent 80%);
+    position: fixed; inset: 0; z-index: -20; pointer-events: none;
+    background: linear-gradient(90deg, transparent 0 7.5%, rgba(255,121,101,.22) 7.5% calc(7.5% + 1px), transparent calc(7.5% + 1px));
+    opacity: .72;
   }
 
-  .app-noise {
-    position: fixed;
-    inset: 0;
-    z-index: -15;
-    pointer-events: none;
-    opacity: 0.05;
-    background-image:
-      radial-gradient(circle, rgba(15, 23, 42, 0.85) 1px, transparent 1px);
-    background-size: 5px 5px;
+  .app-noise { display: none; }
+
+  /* A interface usa contornos para separar cada área de trabalho com clareza. */
+  main [class~="bg-white"],
+  main [class~="bg-slate-50"] {
+    outline: 1px solid #cbdcf4;
+    outline-offset: -1px;
+  }
+
+  main [class~="bg-amber-50"] {
+    outline: 1px solid #f0c86d;
+    outline-offset: -1px;
   }
 
   .surface-panel {
-    @apply rounded-[1.75rem] bg-white/92 shadow-sm ring-1 ring-slate-200/80 backdrop-blur;
+    @apply rounded-[1.5rem] border border-[#cbdcf4] bg-white shadow-[0_5px_0_rgba(20,33,61,0.08)];
   }
 
   .surface-panel-accent {
-    @apply rounded-[1.75rem] bg-gradient-to-br from-emerald-500 via-lime-400 to-yellow-300 text-white shadow-sm;
+    @apply rounded-[1.5rem] bg-[#3565db] text-white shadow-[0_6px_0_rgba(20,33,61,0.2)];
   }
 
   .math-chip {
-    @apply inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-emerald-700;
+    @apply inline-flex items-center rounded-full bg-[#c8f0d8] px-3 py-1 text-xs font-extrabold uppercase tracking-[.13em] text-[#1d3c91];
   }
 
-  .section-heading {
-    @apply text-2xl font-black tracking-tight text-slate-900 sm:text-3xl;
-  }
+  .section-heading { @apply text-3xl font-black text-[#14213d] sm:text-4xl; }
+  .section-subtitle { @apply mt-2 max-w-2xl text-sm leading-6 text-[#607083] sm:text-base; }
 
-  .section-subtitle {
-    @apply mt-2 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base;
-  }
+  .auth-shell { @apply mx-auto max-w-md overflow-hidden rounded-[1.75rem] border border-[#cbdcf4] bg-white shadow-[0_8px_0_rgba(20,33,61,0.12)]; }
+  .auth-rail { @apply relative overflow-hidden bg-[#3565db] p-7 text-white; }
+  .auth-rail::after { content: "x+y"; @apply absolute -right-3 -bottom-8 font-mono text-8xl font-black text-white/10; }
+  .floating-card { @apply transition duration-200 hover:-translate-y-1 hover:shadow-[0_9px_0_rgba(20,33,61,0.11)]; }
 
-  .auth-shell {
-    @apply mx-auto max-w-md overflow-hidden rounded-[2rem] bg-white shadow-sm ring-1 ring-slate-200;
-  }
+  .nav-link { @apply rounded-full px-3 py-2 text-sm font-bold text-[#506176] transition hover:bg-[#dce8ff] hover:text-[#14213d]; }
+  .nav-link-active { @apply bg-[#14213d] text-white hover:bg-[#14213d] hover:text-white; }
+  .button-primary { @apply inline-flex items-center justify-center rounded-full bg-[#ffcd3c] px-5 py-3 text-sm font-extrabold text-[#14213d] shadow-[0_4px_0_#cc9414] transition hover:-translate-y-0.5 hover:bg-[#ffe078] active:translate-y-0 active:shadow-none; }
+  .button-secondary { @apply inline-flex items-center justify-center rounded-full border border-[#cbdcf4] bg-white px-5 py-3 text-sm font-extrabold text-[#14213d] transition hover:bg-[#e9f0ff]; }
+  .form-field { @apply w-full rounded-xl border-[#cbdcf4] bg-white px-4 py-3 text-[#14213d] shadow-inner shadow-slate-100 focus:border-[#3565db] focus:ring-[#3565db]; }
 
-  .auth-rail {
-    @apply bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 p-6 text-white;
-  }
+  .notebook-card { @apply relative overflow-hidden rounded-[1.5rem] border border-[#cbdcf4] bg-white p-5 shadow-[0_5px_0_rgba(20,33,61,0.08)]; }
+  .notebook-card::before { content: ""; @apply absolute inset-x-0 top-0 h-1 bg-[#3565db]; }
+  .notebook-card:nth-child(3n+2)::before { @apply bg-[#ff7965]; }
+  .notebook-card:nth-child(3n)::before { @apply bg-[#ffcd3c]; }
+  .lesson-card { @apply relative overflow-hidden rounded-[1.5rem] border border-[#cbdcf4] bg-white shadow-[0_5px_0_rgba(20,33,61,0.08)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_9px_0_rgba(20,33,61,0.11)]; }
+  .lesson-card::before { content: ""; @apply block h-1.5 bg-[#3565db]; }
+  .lesson-card:nth-child(3n+2)::before { @apply bg-[#ff7965]; }
+  .lesson-card:nth-child(3n)::before { @apply bg-[#ffcd3c]; }
+  .lesson-card-link { @apply inline-flex items-center gap-2 font-extrabold text-[#3565db] transition group-hover:gap-3; }
+  .answer-option { @apply flex cursor-pointer items-center gap-3 rounded-xl border border-[#cbdcf4] bg-white px-4 py-3 font-semibold text-[#14213d] transition hover:-translate-y-0.5 hover:border-[#3565db] hover:bg-[#eef5ff]; }
+  .answer-option:has(input:checked) { @apply border-[#3565db] bg-[#dce8ff] shadow-[0_3px_0_rgba(53,101,219,.2)]; }
 
-  .floating-card {
-    @apply transition duration-300 hover:-translate-y-1 hover:shadow-lg;
-  }
+  .math-playground { @apply relative overflow-hidden rounded-[1.75rem] bg-[#3565db] text-white shadow-[0_7px_0_rgba(20,33,61,0.2)]; }
+  .math-playground::after { content: "✦  +  ✦"; @apply pointer-events-none absolute -right-4 -top-5 rotate-12 text-6xl font-black text-[#ffcd3c]/90; }
+  .math-block { @apply aspect-square rounded-lg bg-[#ffcd3c] shadow-[0_3px_0_#cc9414] transition duration-200 hover:-translate-y-1; }
+  .math-block:nth-child(3n+2) { @apply bg-[#c8f0d8] shadow-[0_3px_0_#8cc6a2]; }
+  .math-block:nth-child(3n) { @apply bg-[#ff7965] shadow-[0_3px_0_#c85040]; }
 }
 
 @layer utilities {
-  .reveal {
-    animation: reveal 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  }
+  .reveal { animation: reveal 600ms cubic-bezier(.2,.8,.2,1) both; }
 }
 
-@keyframes reveal {
-  from {
-    opacity: 0;
-    transform: translateY(14px) scale(0.985);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+@keyframes reveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }

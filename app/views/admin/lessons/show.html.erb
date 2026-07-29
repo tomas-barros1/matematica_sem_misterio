@@ -1,7 +1,43 @@
 <% content_for :title, "Admin - Lição" %>
 
-<div class="space-y-4 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-  <p class="text-sm font-semibold text-emerald-700">Lição</p>
-  <h1 class="text-3xl font-black text-slate-900"><%= @lesson.title %></h1>
-  <p class="text-slate-600"><%= @lesson.description %></p>
+<div class="space-y-6">
+  <section class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+    <div class="flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <p class="text-sm font-semibold text-emerald-700"><%= @lesson.subject.name %></p>
+        <h1 class="mt-1 text-3xl font-black text-slate-900"><%= @lesson.title %></h1>
+        <p class="mt-2 text-slate-600"><%= @lesson.description %></p>
+      </div>
+      <%= link_to "Editar lição", edit_admin_lesson_path(@lesson), class: "rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white" %>
+    </div>
+  </section>
+
+  <section class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <h2 class="text-2xl font-black text-slate-900">Questões</h2>
+        <p class="mt-1 text-sm text-slate-600">Cadastre e ajuste as perguntas que os estudantes responderão nesta lição.</p>
+      </div>
+      <%= link_to "Nova questão", new_admin_question_path(lesson_id: @lesson.id), class: "rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white" %>
+    </div>
+
+    <% if @lesson.questions.any? %>
+      <div class="mt-5 space-y-3">
+        <% @lesson.questions.each_with_index do |question, index| %>
+          <article class="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-slate-50 p-4">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">Questão <%= index + 1 %> · <%= question.multiple_choice? ? "Múltipla escolha" : "Verdadeiro ou falso" %></p>
+              <h3 class="mt-1 font-bold text-slate-900"><%= question.statement %></h3>
+              <p class="mt-1 text-sm text-slate-600">Resposta: <%= question.correct_option_label %></p>
+            </div>
+            <%= link_to "Editar questão", edit_admin_question_path(question), class: "rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-slate-200" %>
+          </article>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="mt-5 rounded-2xl bg-slate-50 p-5 text-sm text-slate-600">
+        Esta lição ainda não tem questões. Cadastre a primeira para disponibilizá-la aos estudantes.
+      </div>
+    <% end %>
+  </section>
 </div>

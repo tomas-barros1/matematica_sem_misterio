@@ -9,7 +9,7 @@ module Admin
     def show; end
 
     def new
-      @question = Question.new
+      @question = Question.new(lesson_id: params[:lesson_id])
     end
 
     def create

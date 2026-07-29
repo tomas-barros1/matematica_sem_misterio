@@ -1,19 +1,19 @@
 <% content_for :title, "Painel" %>
 
 <section class="space-y-8">
-  <div class="reveal rounded-[2rem] bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 p-6 text-white shadow-sm sm:p-8">
+  <div class="reveal overflow-hidden rounded-[1.75rem] bg-[#2454a6] p-6 text-white shadow-[0_7px_0_rgba(20,33,61,0.2)] sm:p-8">
     <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
       <div>
-        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-200">Seu painel</p>
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#cfe6d5]">Seu painel</p>
         <h1 class="mt-2 text-3xl font-black tracking-tight sm:text-4xl">Continue a sequência e suba de nível.</h1>
         <p class="mt-2 max-w-2xl text-sm text-slate-300">Tudo o que você precisa para acompanhar XP, lições concluídas e conquistas em um só lugar.</p>
       </div>
       <div class="grid grid-cols-2 gap-3 sm:min-w-80">
-        <div class="rounded-3xl bg-white/10 p-4 backdrop-blur">
+        <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur">
           <p class="text-xs font-semibold uppercase tracking-wide text-slate-300">Nível</p>
           <p class="mt-2 text-3xl font-black"><%= @progress[:level] %></p>
         </div>
-        <div class="rounded-3xl bg-white/10 p-4 backdrop-blur">
+        <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur">
           <p class="text-xs font-semibold uppercase tracking-wide text-slate-300">XP</p>
           <p class="mt-2 text-3xl font-black"><%= current_user.xp %></p>
         </div>
@@ -36,7 +36,7 @@
             <h2 class="text-xl font-black tracking-tight text-slate-900">Seu progresso</h2>
             <p class="mt-1 text-sm text-slate-600">Falta pouco para o próximo nível.</p>
           </div>
-          <div class="rounded-2xl bg-emerald-50 px-3 py-2 text-sm font-bold text-emerald-700">
+          <div class="rounded-xl bg-[#cfe6d5] px-3 py-2 text-sm font-bold text-[#2454a6]">
             <%= @progress[:percentage] %>%
           </div>
         </div>
