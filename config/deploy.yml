@@ -22,7 +22,7 @@ servers:
 #
 proxy:
   ssl: true
-  host: 137.131.129.245.sslip.io
+  host: matematicasemmisterio.duckdns.org
 
 # Where you keep your container images.
 registry:
