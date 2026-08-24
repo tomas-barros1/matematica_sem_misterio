@@ -20,7 +20,8 @@ class HomeTest < ApplicationSystemTestCase
   test "home page CTA links to registration for guests" do
     visit root_url
 
-    click_on "Começar gratuitamente"
+    # The hero section is the first (topmost) CTA on the page
+    first(:link, "Começar gratuitamente").click
 
     assert_current_path new_user_registration_path
   end
