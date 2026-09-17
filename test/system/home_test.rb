@@ -21,7 +21,7 @@ class HomeTest < ApplicationSystemTestCase
     visit root_url
 
     # The hero section is the first (topmost) CTA on the page
-    first(:link, "Começar gratuitamente").click
+    first(:link, "Começar agora").click
 
     assert_current_path new_user_registration_path
   end
