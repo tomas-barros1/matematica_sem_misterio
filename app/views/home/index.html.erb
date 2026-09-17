@@ -5,7 +5,7 @@
   <meta property="og:description" content="Aprenda matemática fazendo, testando e entendendo cada resposta.">
 <% end %>
 <% cta_path = user_signed_in? ? dashboard_path : new_user_registration_path %>
-<% cta_label = user_signed_in? ? "Ir para meu painel" : "Começar gratuitamente" %>
+<% cta_label = user_signed_in? ? "Ir para meu painel" : "Começar agora" %>
 
 <section class="reveal relative overflow-hidden rounded-[2rem] border-2 border-[#3565db] bg-white shadow-[0_8px_0_rgba(53,101,219,0.18)]" aria-labelledby="home-hero-title">
   <div class="grid lg:grid-cols-[1.08fr,.92fr]">
@@ -132,7 +132,6 @@
       [ "Para qual idade é a plataforma?", "As lições foram pensadas principalmente para crianças e jovens do ensino fundamental, com linguagem simples e desafios graduais." ],
       [ "Posso errar uma resposta?", "Pode, e deve tentar. Ao finalizar a lição, você vê a resposta correta e a explicação de cada questão." ],
       [ "Como acompanho meu avanço?", "Seu painel mostra XP, nível, sequência de estudos, lições concluídas e conquistas desbloqueadas." ],
-      [ "É preciso começar por uma matéria específica?", "Não. Escolha a trilha que faz sentido para você e avance no seu próprio ritmo." ]
     ].each do |question, answer| %>
       <details class="group rounded-2xl border-2 border-[#cbdcf4] bg-white p-5 open:border-[#3565db]">
         <summary class="cursor-pointer list-none pr-8 font-bold text-[#14213d] marker:content-none"><%= question %><span class="float-right -mr-8 text-xl text-[#3565db] group-open:rotate-45">+</span></summary>

@@ -5,7 +5,7 @@ class HomeTest < ApplicationSystemTestCase
     visit root_url
 
     assert_selector "h1", text: "Aprenda testando."
-    assert_selector "a", text: "Começar gratuitamente"
+    assert_selector "a", text: "Começar agora"
     assert_selector "a", text: "Ver como funciona"
   end
 
