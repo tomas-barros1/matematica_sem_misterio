@@ -84,6 +84,11 @@
 
   .nav-link { @apply rounded-full px-3 py-2 text-sm font-bold text-[#506176] transition hover:bg-[#dce8ff] hover:text-[#14213d]; }
   .nav-link-active { @apply bg-[#14213d] text-white hover:bg-[#14213d] hover:text-white; }
+  .nav-logout { @apply bg-[#ff7965] text-[#14213d] shadow-[0_3px_0_#c85040] hover:bg-[#ff9584] hover:text-[#14213d] md:ml-1; }
+  .navigation-toggle { transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease; }
+  .navigation-toggle:hover { @apply border-[#3565db] bg-[#eef5ff]; }
+  .navigation-menu { visibility: hidden; pointer-events: none; opacity: 0; transform: translateY(-0.5rem) scale(.98); transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease; }
+  .navigation-open .navigation-menu { visibility: visible; pointer-events: auto; opacity: 1; transform: translateY(0) scale(1); }
   .button-primary { @apply inline-flex items-center justify-center rounded-full bg-[#ffcd3c] px-5 py-3 text-sm font-extrabold text-[#14213d] shadow-[0_4px_0_#cc9414] transition hover:-translate-y-0.5 hover:bg-[#ffe078] active:translate-y-0 active:shadow-none; }
   .button-secondary { @apply inline-flex items-center justify-center rounded-full border border-[#cbdcf4] bg-white px-5 py-3 text-sm font-extrabold text-[#14213d] transition hover:bg-[#e9f0ff]; }
   .form-field { @apply w-full rounded-xl border-[#cbdcf4] bg-white px-4 py-3 text-[#14213d] shadow-inner shadow-slate-100 focus:border-[#3565db] focus:ring-[#3565db]; }
@@ -105,6 +110,10 @@
   .math-block { @apply aspect-square rounded-lg bg-[#ffcd3c] shadow-[0_3px_0_#cc9414] transition duration-200 hover:-translate-y-1; }
   .math-block:nth-child(3n+2) { @apply bg-[#c8f0d8] shadow-[0_3px_0_#8cc6a2]; }
   .math-block:nth-child(3n) { @apply bg-[#ff7965] shadow-[0_3px_0_#c85040]; }
+}
+
+@media (min-width: 768px) {
+  .navigation-menu { visibility: visible; pointer-events: auto; opacity: 1; transform: none; }
 }
 
 @layer utilities {
