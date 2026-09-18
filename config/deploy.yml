@@ -1,6 +1,10 @@
 # Name of your application. Used to uniquely configure containers.
 service: matematica_sem_misterio
 
+# Rails and Solid Queue need extra time to boot while sharing the SQLite volume.
+deploy_timeout: 120
+drain_timeout: 30
+
 # Name of the container image (use your-user/app-name on external registries).
 image: matematica_sem_misterio
 
